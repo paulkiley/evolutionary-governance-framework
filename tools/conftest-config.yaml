@@ -1,0 +1,6 @@
+# Configuration for conftest
+policy:
+  # Directory containing Rego policies
+  paths:
+    - platform/policy/opa/policies
+data: []

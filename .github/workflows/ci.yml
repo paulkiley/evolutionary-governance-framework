@@ -1,0 +1,22 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install pre-commit conftest
+          pre-commit install-hooks
+      - name: Run pre-commit
+        run: pre-commit run --all-files
+      - name: Run conftest policy checks
+        run: conftest test platform/policy/opa
